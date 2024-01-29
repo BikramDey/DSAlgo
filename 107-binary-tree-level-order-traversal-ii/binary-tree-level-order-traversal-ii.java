@@ -31,10 +31,10 @@ class Solution {
                 if (t.right != null)
                     q.add(t.right); 
             }
-            r.add(0, a);
+            r.add(a);
             
         }
-        
+        Collections.reverse(r);
         return r;
     }
 }
