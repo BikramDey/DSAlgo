@@ -1,5 +1,8 @@
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
+        if(nums.length == 1)
+            return new ArrayList<>();
+            
         List<Integer> result = new ArrayList<>();
         for(int i : nums){
             nums[Math.abs(i)-1] *= -1;
