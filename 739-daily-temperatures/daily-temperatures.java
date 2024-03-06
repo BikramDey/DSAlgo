@@ -8,16 +8,15 @@ class Solution {
         }
 
         Stack<Integer> st = new Stack<>();
-        st.push(l);
 
-        for(int i=l-1; i>=0;i--){
+        for(int i=l; i>=0;i--){
             while(!st.isEmpty() && temperatures[i]>=temperatures[st.peek()]){
                 st.pop();
             }
-            if(!st.isEmpty() && temperatures[i]<temperatures[st.peek()]){
-                arr[i] = st.peek()-i;
-            } else{
+            if(st.isEmpty()) {
                 arr[i] = 0;
+            } else{
+                arr[i] = st.peek()-i;
             }
             st.push(i);
         }
