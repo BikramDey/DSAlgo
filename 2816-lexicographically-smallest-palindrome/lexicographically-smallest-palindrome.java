@@ -3,9 +3,9 @@ class Solution {
         char[] ch = s.toCharArray();
         int n = s.length();
         for(int i=0; i<n/2; i++){
-            if(ch[i] == ch[n-i-1])
-                continue;
-            else if(ch[i] < ch[n-i-1])
+            // if(ch[i] == ch[n-i-1])
+            //     continue;
+            if(ch[i] < ch[n-i-1])
                 ch[n-i-1] = ch[i];
             else
                 ch[i] = ch[n-i-1];
