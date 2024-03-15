@@ -1,41 +1,23 @@
 class Solution {
     public String multiply(String num1, String num2) {
-        int len1 = num1.length();
-        int len2 = num2.length();
-        if (len1 == 0 || len2 == 0)
-            return "0";
-        int result[] = new int[len1 + len2];
-        int i_n1 = 0; 
-        int i_n2 = 0; 
-        for (int i = len1 - 1; i >= 0; i--)
-        {
-            int carry = 0;
-            int n1 = num1.charAt(i) - '0';
-            i_n2 = 0; 			 
-            for (int j = len2 - 1; j >= 0; j--)
-            {
-                int n2 = num2.charAt(j) - '0';
-                int sum = n1 * n2 + result[i_n1 + i_n2] + carry;
-                carry = sum / 10;
-                result[i_n1 + i_n2] = sum % 10;
-                i_n2++;
+        final int m = num1.length();
+        final int n = num2.length();
+
+        StringBuilder sb = new StringBuilder();
+        int[] pos = new int[m + n];
+
+        for (int i = m - 1; i >= 0; --i){
+            for (int j = n - 1; j >= 0; --j) {
+                final int multiply = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                final int sum = multiply + pos[i + j + 1];
+                pos[i + j] += sum / 10;
+                pos[i + j + 1] = sum % 10;
             }
-            if (carry > 0)
-                result[i_n1 + i_n2] += carry;
-            i_n1++;
         }
-        int i = result.length - 1;
+        for (final int p : pos)
+        if (p > 0 || sb.length() > 0)
+            sb.append(p);
 
-        while (i >= 0 && result[i] == 0)
-            i--;
-
-        if (i == -1)
-            return "0";
-
-        String s = "";	
-        while (i >= 0)
-            s += (result[i--]);
-
-        return s;
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 }
