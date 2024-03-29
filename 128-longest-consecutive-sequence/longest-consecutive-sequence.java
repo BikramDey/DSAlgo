@@ -1,23 +1,18 @@
 class Solution {
-    public int longestConsecutive(int[] nums) {
-        if(nums == null || nums.length == 0) 
-            return 0;
+  public int longestConsecutive(int[] nums) {
+    int ans = 0;
+    Set<Integer> seen = Arrays.stream(nums).boxed().collect(Collectors.toSet());
 
-        Set<Integer> set = new HashSet<>();
-        for(int n : nums) 
-            set.add(n);
-
-        int result = 0;
-
-        for (int num : nums) {
-            if (set.contains(num - 1))
-                continue;
-            int length = 1;
-            while (set.contains(++num))
-                ++length;
-            result = Math.max(result, length);
-        }
-
-        return result;
+    for (int num : nums) {
+      // `num` is the start of a sequence.
+      if (seen.contains(num - 1))
+        continue;
+      int length = 1;
+      while (seen.contains(++num))
+        ++length;
+      ans = Math.max(ans, length);
     }
+
+    return ans;
+  }
 }
