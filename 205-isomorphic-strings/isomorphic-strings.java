@@ -4,20 +4,19 @@ class Solution {
             return false;
         }
         
-        HashMap<Character, Character> sToT = new HashMap<>();
-        HashMap<Character, Character> tToS = new HashMap<>();
+        int[] sFreq = new int[256];
+        int[] tFreq = new int[256];
         
         for (int i = 0; i < s.length(); i++) {
             char sChar = s.charAt(i);
             char tChar = t.charAt(i);
             
-            if ((sToT.containsKey(sChar) && sToT.get(sChar) != tChar) ||
-                (tToS.containsKey(tChar) && tToS.get(tChar) != sChar)) {
+            if (sFreq[sChar] != tFreq[tChar]) {
                 return false;
             }
             
-            sToT.put(sChar, tChar);
-            tToS.put(tChar, sChar);
+            sFreq[sChar] = i + 1;
+            tFreq[tChar] = i + 1;
         }
         
         return true;
