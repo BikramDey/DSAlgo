@@ -1,8 +1,7 @@
 class Solution {
     public String simplifyPath(String path) {
-        String[] dirs = path.split("/");
         Stack<String> stack = new Stack<>();
-        for (String dir : dirs) {
+        for (String dir : path.split("/")) {
             if (dir.isEmpty() || dir.equals("."))
                 continue;
             if (dir.equals("..")) {
