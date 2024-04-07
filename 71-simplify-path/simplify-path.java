@@ -11,8 +11,7 @@ class Solution {
                 stack.push(dir);
             }
         }
-        String simplifiedPath = "/" + String.join("/", stack);
       
-        return simplifiedPath;
+        return "/" + String.join("/", stack);
     }
 }
