@@ -13,7 +13,9 @@ class Solution {
             while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
                 stack.pop();
             }
-                prevMin[i] = stack.isEmpty()? -1 : stack.peek();
+            if (!stack.isEmpty())
+                prevMin[i] = stack.peek();
+
             stack.push(i);
         }
         stack.clear();
@@ -21,10 +23,12 @@ class Solution {
             while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
                 stack.pop();
             }
-                nextMin[i] = stack.isEmpty()? n : stack.peek();
+            if (!stack.isEmpty())
+                nextMin[i] = stack.peek();
+
             stack.push(i);
         }
-        for (int i = 0; i < arr.length; ++i) {
+        for (int i = 0; i < n; ++i) {
             ans += (long) arr[i] * (i - prevMin[i]) * (nextMin[i] - i);
             ans %= kMod;
         }
