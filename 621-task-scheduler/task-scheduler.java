@@ -1,43 +1,23 @@
 class Solution {
     public int leastInterval(char[] tasks, int n) {
-        int time = 0;
-        int[] freq = new int[26];
-        PriorityQueue<Task> pq = new PriorityQueue<>((a, b) -> b.count - a.count);
+        int[] fq = new int[26];
+        int maxfq = 0;
 
-        for(char task: tasks) {
-            freq[task-'A']++;
+        for (char task : tasks) {
+            int index = task - 'A';
+            fq[index]++;
+            
+            maxfq = Math.max(maxfq, fq[index]);
         }
 
-        for(int i=0; i<26; i++) {
-            if(freq[i]>=1)
-                pq.add(new Task(0, freq[i]));
-        }
-        Queue<Task> q = new LinkedList<>();
-        while(!pq.isEmpty() || !q.isEmpty()) {
-
-            if(!q.isEmpty() && (time-q.peek().time)>n) {
-                pq.add(q.remove());
+        int maxFqCount = 0;
+        for (int count : fq) {
+            if (count == maxfq) {
+                maxFqCount++;
             }
-
-            if(!pq.isEmpty()) {
-                Task t = pq.remove();
-                t.count--;
-                t.time=time;
-                if(t.count>0) {
-                    q.add(t);
-                }
-            }
-
-            time++;
         }
-        return time;
-    }
-    class Task{
-        int time, count;
-        public Task(int t, int c){
-            time = t;
-            count = c;
-        }
+        int result = Math.max(tasks.length, (maxfq - 1) * (n + 1) + maxFqCount);
+
+        return result;
     }
 }
-    
