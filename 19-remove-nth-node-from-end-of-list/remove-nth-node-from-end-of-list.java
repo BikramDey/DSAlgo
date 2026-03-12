@@ -13,18 +13,23 @@ class Solution {
         if(head == null || head.next == null)
             return null;
 
-        ListNode temp = new ListNode(-1);
-        temp.next = head;
-        while(n-->0){
-            head = head.next;
+        ListNode temp = head;
+        int c = 0;
+        while(temp != null){
+            c++;
+            temp = temp.next;
         }
-        
-        ListNode current = temp;
-        while(head!=null){
-            head = head.next;
-            current = current.next;
+        int r = c - n;
+        if(r == 0)
+            return head.next;
+        temp = head.next;
+        ListNode temp2 = head;
+
+        while(r-->1){
+            temp = temp.next;
+            temp2 = temp2.next;
         }
-        current.next = current.next.next;
-        return temp.next;
+        temp2.next = temp.next;
+        return head;
     }
 }
