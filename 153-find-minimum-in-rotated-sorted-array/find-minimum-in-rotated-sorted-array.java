@@ -3,18 +3,17 @@ class Solution {
         int l = 0;
         int r = nums.length - 1;
         while(l<=r){
-            int mid = l+(r-l)/2;
+            if (nums[l] <= nums[r]) 
+                return nums[l];
 
-            if(nums[l] <= nums[mid]){
-                if(nums[l] <= nums[r])
-                    r = mid-1;
-                else
-                    l = mid+1;
-            }
-            else{
-                r = mid;
-                l++;
-            }
+            int m = l + (r - l) / 2;
+            if (m > 0 && nums[m] < nums[m - 1]) 
+                return nums[m];
+
+            if (nums[l] > nums[m]) 
+                r = m - 1;
+            else 
+                l = m + 1;
         }
         return nums[l];
     }
