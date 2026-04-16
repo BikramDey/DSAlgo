@@ -28,4 +28,9 @@ class Solution {
         return checkSymmetric(n1.left, n2.right) && checkSymmetric(n1.right, n2.left);
         
     }
+    // if (left == null && right == null) return true;
+    // if (left == null || right == null) return false;
+    // return (left.val == right.val) &&
+    //        isMirror(left.left, right.right) &&
+    //        isMirror(left.right, right.left);
 }
