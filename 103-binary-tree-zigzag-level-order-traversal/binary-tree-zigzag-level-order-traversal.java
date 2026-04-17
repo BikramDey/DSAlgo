@@ -22,31 +22,51 @@ class Solution {
         if(root == null)
             return r;
             
-        Deque<TreeNode> q = new ArrayDeque<>();
-        q.add(root);
-        while(!q.isEmpty()){
-            int s = q.size();
-            List<Integer> a = new ArrayList<>();
-            while(s-->0){
-                TreeNode t = null;
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.add(root);
+        while(!deque.isEmpty()){
+            List<Integer> ans = new ArrayList<>();
+            int n = deque.size();
+            while(n-->0){
+                TreeNode temp = null;
                 if(leftToRight){
-                    t = q.pollFirst();
-                    if (t.left != null)
-                        q.addLast(t.left);
-                    if (t.right != null)
-                        q.addLast(t.right); 
+                    temp = deque.pollFirst();
+                    if (temp.left != null)
+                        deque.addLast(temp.left);
+                    if (temp.right != null)
+                        deque.addLast(temp.right);
                 }else{
-                    t = q.pollLast();
-                    if (t.right != null)
-                        q.addFirst(t.right); 
-                    if (t.left != null)
-                        q.addFirst(t.left);
+                    temp = deque.pollLast();
+                    if (temp.right != null)
+                        deque.addFirst(temp.right);
+                    if (temp.left != null)
+                        deque.addFirst(temp.left);
                 }
-                a.add(t.val);
+                ans.add(temp.val);
             }
-            r.add(a);
+            r.add(ans);
             leftToRight = !leftToRight;
         }
         return r;
     }
+    // if (root == null) return result;
+    // Queue q = new LinkedList<>();
+    // q.offer(root);
+    // boolean leftToRight = true;
+
+    // while (!q.isEmpty()) {
+    //     int size = q.size();
+    //     Integer[] level = new Integer[size];
+    //     for (int i = 0; i < size; i++) {
+    //         TreeNode curr = q.poll();
+    //         int index = leftToRight ? i : size - 1 - i;
+    //         level[index] = curr.val;
+
+    //         if (curr.left != null) q.offer(curr.left);
+    //         if (curr.right != null) q.offer(curr.right);
+    //     }
+    //     result.add(Arrays.asList(level));
+    //     leftToRight = !leftToRight;
+    // }
+    // return result;
 }
