@@ -3,7 +3,9 @@ class Solution {
 
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
-        ArrayList<int[]> ans = new ArrayList<>();
+        // ArrayList<> ans = new ArrayList<>(); Just this won't work 
+        // as it will store as object not as array
+            ArrayList<int[]> ans = new ArrayList<>();
         ans.add(intervals[0]);
 
         // You cannot do this way as ans.get and update
